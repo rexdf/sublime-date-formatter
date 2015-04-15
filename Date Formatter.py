@@ -81,7 +81,10 @@ class FormatDateCommand(sublime_plugin.WindowCommand):
         ]
         args += dates
         try:
-            proc = subprocess.Popen(args, stdout=subprocess.PIPE)
+            startupinfo = subprocess.STARTUPINFO()
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            proc = subprocess.Popen(args, startupinfo=startupinfo,
+                                    stdout=subprocess.PIPE)
         except OSError:
             show_php_error()
             return
@@ -114,7 +117,10 @@ class FormatDateCommand(sublime_plugin.WindowCommand):
         ]
         args += [format[0] for format in self.formats]
         try:
-            proc = subprocess.Popen(args, stdout=subprocess.PIPE)
+            startupinfo = subprocess.STARTUPINFO()
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            proc = subprocess.Popen(args, startupinfo=startupinfo,
+                                    stdout=subprocess.PIPE)
         except OSError:
             show_php_error()
             return
